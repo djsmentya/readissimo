@@ -1,5 +1,10 @@
 import React, { Component, PropTypes } from 'react'
+import { connect } from 'react-redux'
 import { Col } from 'react-bootstrap'
+
+import { bindActionCreators } from 'redux'
+import * as pageActions from '../actions/PageActions'
+
 
 class App extends Component {
   static propTypes = {
@@ -8,12 +13,17 @@ class App extends Component {
     projects: PropTypes.array.isRequired
   }
 
+componentDidMount(){
+    const { getProjects } = this.props.pageActions
+    getProjects()
+}
   render() {
-    const projects = [1,2,3,4,5,6,7].map((project)=>{
+    console.log(this.props)
+    const projects = this.props.projects.map((project)=>{
       return (
-        <Col sm={4} key={project}>
+        <Col sm={4} key={project.id} >
         <div className="well well-sm">
-            <h1>Hello{project}</h1>
+            <h1>{project.name}</h1>
           </div>
         </Col>
       )
@@ -31,4 +41,15 @@ class App extends Component {
 App.defaultProps = {
   projects: []
 }
-export default App
+
+const mapStateToProps = (state) => ({
+  projects: state.projects.projects
+})
+
+function mapDispatchToProps(dispatch) {
+  return {
+    pageActions: bindActionCreators(pageActions, dispatch)
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App)

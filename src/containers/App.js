@@ -1,4 +1,4 @@
-import React, { Component, PropTypes } from 'react'
+import { Component, PropTypes } from 'react'
 
 
 class App extends Component {
@@ -8,11 +8,7 @@ class App extends Component {
   }
 
   render() {
-    return(
-      <div>
-      {this.props.children}
-      </div>
-      )
+    return(this.props.children )
   }
 }
 

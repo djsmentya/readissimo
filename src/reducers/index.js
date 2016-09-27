@@ -1,5 +1,4 @@
-import * as ActionTypes from '../actions'
-import merge from 'lodash/merge'
+//import merge from 'lodash/merge'
 import { routerReducer as routing } from 'react-router-redux'
 import { combineReducers } from 'redux'
 
@@ -14,8 +13,6 @@ export function projects(state = initialState , action) {
     default: 
       return state;
   }
-
-  return state
 }
 
 // Updates the pagination data for different actions.

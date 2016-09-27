@@ -1,12 +1,12 @@
 import React from 'react'
-import { Route } from 'react-router'
+import { Route, IndexRoute } from 'react-router'
 import App from './containers/App'
-import UserPage from './containers/UserPage'
-import RepoPage from './containers/RepoPage'
+import ProjectPage from './components/ProjectPage'
+import Projects from './components/Projects'
 
 export default <Route path="/" component={App}>
-  <Route path="/:login/:name"
-         component={RepoPage} />
-  <Route path="/:login"
-         component={UserPage} />
+  <IndexRoute component={Projects} />
+  <Route path="projects/:id"
+         component={ProjectPage} />
+
 </Route>

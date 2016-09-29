@@ -1,11 +1,14 @@
-export function getProjects(dispatch) {
-  
-  let projects = [{name: 'Likes', id: 1}, {name: 'Breacks', id: 2 }]
-  
-  return (dispatch) => {
-      dispatch({
-        type: "GET_PROJECTS",
-        payload: projects
-      })
+import axios from 'axios'
+
+function fetchProjects(data) {
+  return {
+    type: "GET_PROJECTS",
+    payload: data 
+  }
+}
+export default function getProjects() {
+  return (dispatch)=>{
+    axios.get(`/api/projects.json`)
+    .then(response => dispatch(fetchProjects(response.data)))
   }
 }

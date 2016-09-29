@@ -1,7 +1,6 @@
 import React, { PropTypes, Component } from 'react'
 import { connect } from 'react-redux'
-import * as pageActions from '../actions/PageActions'
-import { bindActionCreators } from 'redux'
+import getProjects from '../actions/PageActions'
 import { Col } from 'react-bootstrap'
 import { Link } from 'react-router'
 
@@ -12,7 +11,6 @@ class Projects extends Component {
   }
     
     render () {
-      console.log(this) 
       const projects = this.props.projects.map((project)=>{
         return (
           <Col sm={4} key={project.id} >
@@ -36,8 +34,7 @@ class Projects extends Component {
     
     
   componentDidMount(){
-      const { getProjects } = this.props.pageActions
-      getProjects()
+    this.props.dispatch(getProjects())
   }
 }
 
@@ -49,10 +46,4 @@ const mapStateToProps = (state) => ({
   projects: state.projects.projects
 })
 
-function mapDispatchToProps(dispatch) {
-  return {
-    pageActions: bindActionCreators(pageActions, dispatch)
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Projects)
+export default connect(mapStateToProps, null)(Projects)

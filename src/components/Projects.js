@@ -9,30 +9,30 @@ class Projects extends Component {
   static propTypes = {
     projects: PropTypes.array.isRequired
   }
-    
-    render () {
-      const projects = this.props.projects.map((project)=>{
-        return (
-          <Col sm={4} key={project.id} >
-            <Link to={'/projects/' + project.id}>
-              <div className="well well-sm">
-                <h1>{project.name}</h1>
-              </div>
-            </Link>
-          </Col>
-        )
-      })
-    
+
+  render () {
+    const projects = this.props.projects.map((project)=>{
       return (
-          <div className="container-fluid">
-            <h1>Projects</h1>
-            <hr/>
-            {projects}
-          </div>
+        <Col sm={4} key={project.id} >
+        <Link to={'/projects/' + project.id}>
+        <div className="well well-sm">
+        <h1>{project.name}</h1>
+        </div>
+        </Link>
+        </Col>
       )
-    }
-    
-    
+    })
+
+    return (
+      <div className="container-fluid">
+      <h1>Projects</h1>
+      <hr/>
+      {projects}
+      </div>
+    )
+  }
+
+
   componentDidMount(){
     this.props.dispatch(getProjects())
   }

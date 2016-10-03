@@ -1,6 +1,6 @@
 import React, { PropTypes, Component } from 'react'
 import { connect } from 'react-redux'
-import getProjects from '../actions/PageActions'
+import { getProjects } from '../actions/PageActions'
 import { Col } from 'react-bootstrap'
 import { Link } from 'react-router'
 
@@ -43,7 +43,7 @@ Projects.defaultProps = {
 }
 
 const mapStateToProps = (state) => ({
-  projects: state.projects.projects
+  projects: state.readissimo.projects
 })
 
 export default connect(mapStateToProps, null)(Projects)

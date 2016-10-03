@@ -1,0 +1,51 @@
+[
+   {
+      "id":2,
+      "status":"New",
+      "stage":"Backlog",
+      "assigned":[
+         {
+            "name":"Eugene"
+         },
+         {
+            "name":"George"
+         }
+      ],
+      "title":"Test task"
+   },
+   {
+      "id":1,
+      "status":"Accepted",
+      "stage":"TODO",
+      "assigned":[
+         {
+            "name":"Eugene"
+         },
+         {
+            "name":"George"
+         }
+      ],
+      "title":"Test task 2"
+   },
+   {
+      "id":4,
+      "status":"Done",
+      "stage":"Code Review",
+      "assigned":[
+         {
+            "name":"Eugene"
+         },
+         {
+            "name":"George"
+         }
+      ],
+      "title":"Test task 2"
+   },
+   {
+      "id":3,
+      "status":"Done",
+      "stage":"QA",
+      "assigned":[ ],
+      "title":"Test task 2"
+   }
+]

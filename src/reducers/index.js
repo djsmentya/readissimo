@@ -5,19 +5,20 @@ import { combineReducers } from 'redux'
 const initialState = {
   projects:[]
 }
-export function projects(state = initialState , action) {
+export function readissimo(state = initialState , action) {
   switch (action.type) {
     case 'GET_PROJECTS':
       return { ...state, projects: action.payload }
-    
-    default: 
+    case 'GET_TASKS':
+      return { ...state, tasks: action.payload }
+    default:
       return state;
   }
 }
 
 // Updates the pagination data for different actions.
 const rootReducer = combineReducers({
-  projects,
+  readissimo,
   routing
 })
 

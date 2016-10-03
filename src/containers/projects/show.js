@@ -1,46 +1,19 @@
 import React, { Component } from 'react'
 import { Grid, Col } from 'react-bootstrap';
+import Story from '../../components/Story'
+import { connect } from 'react-redux'
+import { getTasks } from '../../actions/PageActions'
 
 
-export default class Dashboard extends Component {
+class Dashboard extends Component {
   constructor(props) {
     super(props);
-    this.state = {boardGroupField: 'stage'};
+    this.state = {boardGroupField: 'stage'}; // TODO move to redux
   }
 
   render () {
-      let tasks = [
-        {
-          id: 2,
-          status: 'New',
-          stage: 'Backlog',
-          assigned: [{name: 'Eugene'},{name: 'George'}],
-          title: 'Test task'
-        },
-        {
-          id: 1,
-          status: 'Accepted',
-          stage: 'TODO',
-          assigned: [{name: 'Eugene'},{name: 'George'}],
-          title: 'Test task 2'
-        },
-        {
-          id: 3,
-          status: 'Done',
-          stage: 'QA',
-          assigned: [{name: 'Eugene'},{name: 'George'}],
-          title: 'Test task 2'
-        },
-        {
-          id: 4,
-          status: 'Done',
-          stage: 'Code Review',
-          assigned: [{name: 'Eugene'},{name: 'George'}],
-          title: 'Test task 2'
-        }
-      ]
 
-      let grouppedTasks = this.groupTasks(tasks, this.state.boardGroupField)
+      let grouppedTasks = this.groupTasks(this.props.tasks, this.state.boardGroupField)
 
       return (
         <Grid bsClass="container-fluid">
@@ -51,6 +24,10 @@ export default class Dashboard extends Component {
       )
     }
 
+  componentWillMount () {
+    this.props.dispatch(getTasks(this.props.params.id))
+  }
+
     groupTasks (tasks, field) {
       let list = {}
       tasks.forEach((task)=>{
@@ -59,6 +36,15 @@ export default class Dashboard extends Component {
       return list
     }
 }
+
+Dashboard.defaultProps = {
+  tasks: []
+}
+
+const mapStateToProps = (state) => ({
+  tasks: state.readissimo.tasks
+})
+export default connect(mapStateToProps, null)(Dashboard)
 
 class Board extends Component {
   render() {
@@ -71,12 +57,3 @@ class Board extends Component {
   }
 }
 
-class Story extends Component {
-  render() {
-    return (
-      <div className="well">
-        {this.props.title}
-      </div>
-    )
-  }
-}

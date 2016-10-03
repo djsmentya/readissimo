@@ -6,9 +6,24 @@ function fetchProjects(data) {
     payload: data 
   }
 }
-export default function getProjects() {
+
+function fetchTasks(data) {
+  return {
+    type: "GET_TASKS",
+    payload: data 
+  }
+}
+
+export function getProjects() {
   return (dispatch)=>{
     axios.get(`/api/projects.json`)
     .then(response => dispatch(fetchProjects(response.data)))
+  }
+}
+
+export function getTasks(projectId) {
+  return (dispatch)=>{
+    axios.get(`/api/projects/${projectId}/tasks.json`)
+    .then(response => dispatch(fetchTasks(response.data)))
   }
 }

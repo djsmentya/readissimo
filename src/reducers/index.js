@@ -11,6 +11,17 @@ export function readissimo(state = initialState , action) {
       return { ...state, projects: action.payload }
     case 'GET_TASKS':
       return { ...state, tasks: action.payload }
+    case 'UPDATE_TASKS':
+      return Object.assign({}, state, {
+          tasks: state.tasks.map((task, index) => {
+            if (task.id === action.id) {
+              return Object.assign({}, task, action.payload)
+            } else {
+              return task
+            }
+          })
+        }
+      )
     default:
       return state;
   }

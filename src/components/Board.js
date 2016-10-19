@@ -7,8 +7,7 @@ import { ItemTypes } from '../constants/ItemTypes'
 
 const boxTarget = {
   drop(props) {
-    console.log(props);
-    return { title: props.title };
+    return { title: props.title, field: 'stage' };
   }
 }
 
@@ -46,7 +45,7 @@ class Board extends Component {
       connectDropTarget(
         <div className='col-sm-3' style={{ ...style, backgroundColor }}>
           <h5>{this.props.title}</h5>
-          {this.props.stories.map((story) =>{ return <Story key={story.id} title={story.title} />})}
+          {this.props.stories.map((story) =>{ return <Story key={story.id} title={story.title} id={story.id} />})}
         </div>
       )
     )

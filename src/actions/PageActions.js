@@ -3,14 +3,22 @@ import axios from 'axios'
 function fetchProjects(data) {
   return {
     type: "GET_PROJECTS",
-    payload: data 
+    payload: data
   }
 }
 
 function fetchTasks(data) {
   return {
     type: "GET_TASKS",
-    payload: data 
+    payload: data
+  }
+}
+
+function updateTask(data, id) {
+  return {
+    type: "UPDATE_TASKS",
+    payload: data,
+    id: id
   }
 }
 
@@ -26,4 +34,8 @@ export function getTasks(projectId) {
     axios.get(`/api/projects/${projectId}/tasks.json`)
     .then(response => dispatch(fetchTasks(response.data)))
   }
+}
+
+export function dragTask(taskId, val) {
+  return updateTask(val, taskId)
 }

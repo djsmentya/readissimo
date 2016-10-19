@@ -1,5 +1,7 @@
 import React, { Component, PropTypes } from 'react'
+import { connect } from 'react-redux'
 import { DragSource } from 'react-dnd'
+import { dragTask } from '../actions/PageActions'
 
 import { ItemTypes } from '../constants/ItemTypes'
 
@@ -9,7 +11,8 @@ const style = {
 const boxSource = {
   beginDrag(props) {
     return {
-      name: props.title
+      title: props.title,
+      id: props.id
     };
   },
 
@@ -18,10 +21,9 @@ const boxSource = {
     const dropResult = monitor.getDropResult();
 
     if (dropResult) {
-      console.log(item);
-      window.alert( // eslint-disable-line no-alert
-        `You dropped ${item.title} into ${dropResult.title}!`
-      );
+      let newState = {}
+      newState[dropResult.field] = dropResult.title
+      props.dispatch(dragTask(item.id, newState))
     }
   }
 }
@@ -39,7 +41,8 @@ class Story extends Component {
   static propTypes = {
     connectDragSource: PropTypes.func.isRequired,
     isDragging: PropTypes.bool.isRequired,
-    title: PropTypes.string.isRequired
+    title: PropTypes.string.isRequired,
+    id: PropTypes.number.isRequired
   }
 
   render() {
@@ -56,4 +59,5 @@ class Story extends Component {
   }
 }
 
-export default DragSource(ItemTypes.BOARD, boxSource, collect)(Story)
+Story = DragSource(ItemTypes.BOARD, boxSource, collect)(Story)
+export default connect()(Story)

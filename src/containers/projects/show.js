@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import { Grid, Col } from 'react-bootstrap';
-import Story from '../../components/Story'
+import { Grid } from 'react-bootstrap';
+import Wall from '../../components/Wall'
 import { connect } from 'react-redux'
 import { getTasks } from '../../actions/PageActions'
 
@@ -13,13 +13,13 @@ class Dashboard extends Component {
 
   render () {
 
-      let grouppedTasks = this.groupTasks(this.props.tasks, this.state.boardGroupField)
+      let groupedTasks = this.groupTasks(this.props.tasks, this.state.boardGroupField)
 
       return (
         <Grid bsClass="container-fluid">
         <h1>Projects</h1>
         <hr/>
-        {Object.keys(grouppedTasks).map((item)=>{ return <Board key={item} title={item} stories={grouppedTasks[item]} /> })}
+        <Wall groupedTasks={groupedTasks} />
         </Grid>
       )
     }
@@ -46,14 +46,4 @@ const mapStateToProps = (state) => ({
 })
 export default connect(mapStateToProps, null)(Dashboard)
 
-class Board extends Component {
-  render() {
-    return(
-      <Col sm={3}>
-        <h5>{this.props.title}</h5>
-        {this.props.stories.map((story) =>{ return <Story key={story.id} title={story.title} />})}
-      </Col>
-    )
-  }
-}
 
